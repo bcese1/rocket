@@ -17,6 +17,8 @@ def main():
     lives = 3
     font = pygame.font.SysFont("calibri", 50, bold=True)
 
+    ship_vel = 15
+
     rocket_ship = ship.Ship(300, 650)
 
     clock = pygame.time.Clock()  # set clock for clock tick
@@ -38,5 +40,14 @@ def main():
             if event.type == pygame.QUIT:  # close application window
                 start = False
 
+        key = pygame.key.get_pressed()
+        if key[pygame.K_LEFT]:
+            rocket_ship.x -= ship_vel
+        if key[pygame.K_RIGHT]:
+            rocket_ship.x += ship_vel
+        if key[pygame.K_UP]:
+            rocket_ship.y -= ship_vel
+        if key[pygame.K_DOWN]:
+            rocket_ship.y += ship_vel
 
 main()
