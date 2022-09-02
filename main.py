@@ -41,13 +41,14 @@ def main():
                 start = False
 
         key = pygame.key.get_pressed()
-        if key[pygame.K_LEFT]:
+        if key[pygame.K_LEFT] and rocket_ship.x - ship_vel > 0:
             rocket_ship.x -= ship_vel
-        if key[pygame.K_RIGHT]:
+        if key[pygame.K_RIGHT] and rocket_ship.x + ship_vel + 50 < width:
             rocket_ship.x += ship_vel
-        if key[pygame.K_UP]:
+        if key[pygame.K_UP] and rocket_ship.y - ship_vel > 0:
             rocket_ship.y -= ship_vel
-        if key[pygame.K_DOWN]:
+        if key[pygame.K_DOWN] and rocket_ship.y + ship_vel + 50 < height:
             rocket_ship.y += ship_vel
+
 
 main()
