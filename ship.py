@@ -12,5 +12,10 @@ class Ship:
         self.bullet_cd = 0
 
     def draw(self, window):
-        pygame.draw.rect(window, (255, 0, 0), (self.x, self.y, 50, 50))
+        window.blit(self.ship_img, (self.x, self.y))
 
+    def get_width(self):
+        return self.ship_img.get_width()
+
+    def get_height(self):
+        return self.ship_img.get_height()

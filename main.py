@@ -2,6 +2,7 @@ import pygame
 import random
 import images
 import ship
+import player
 
 pygame.font.init()
 width, height = 720, 720  # height and width of window
@@ -19,7 +20,7 @@ def main():
 
     ship_vel = 15
 
-    rocket_ship = ship.Ship(300, 650)
+    player.Player = player.Player(300, 540)
 
     clock = pygame.time.Clock()  # set clock for clock tick
 
@@ -29,7 +30,7 @@ def main():
         dis_level = font.render(f"Level: {level}", True, (255, 255, 255))
         win.blit(dis_lives, (10, 10))
         win.blit(dis_level, (width - dis_level.get_width() - 10, 10))
-        rocket_ship.draw(win)
+        player.Player.draw(win)
         pygame.display.update()  # update display window
 
     while start:
@@ -41,13 +42,14 @@ def main():
                 start = False
 
         key = pygame.key.get_pressed()
-        if key[pygame.K_LEFT]:
-            rocket_ship.x -= ship_vel
-        if key[pygame.K_RIGHT]:
-            rocket_ship.x += ship_vel
-        if key[pygame.K_UP]:
-            rocket_ship.y -= ship_vel
-        if key[pygame.K_DOWN]:
-            rocket_ship.y += ship_vel
+        if key[pygame.K_LEFT] and player.Player.x - ship_vel > 0:
+            player.Player.x -= ship_vel
+        if key[pygame.K_RIGHT] and player.Player.x + ship_vel + player.Player.get_width() < width:
+            player.Player.x += ship_vel
+        if key[pygame.K_UP] and player.Player.y - ship_vel > 0:
+            player.Player.y -= ship_vel
+        if key[pygame.K_DOWN] and player.Player.y + ship_vel + player.Player.get_height() < height:
+            player.Player.y += ship_vel
+
 
 main()
