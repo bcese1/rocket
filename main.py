@@ -26,11 +26,11 @@ def main():
 
     def refresh():
         win.blit(images.bg, (0, 0))  # display bg at coord
+        player.Player.draw(win)
         dis_lives = font.render(f"Lives: {lives}", True, (255, 255, 255))
         dis_level = font.render(f"Level: {level}", True, (255, 255, 255))
         win.blit(dis_lives, (10, 10))
         win.blit(dis_level, (width - dis_level.get_width() - 10, 10))
-        player.Player.draw(win)
         pygame.display.update()  # update display window
 
     while start:
@@ -46,7 +46,7 @@ def main():
             player.Player.x -= ship_vel
         if key[pygame.K_RIGHT] and player.Player.x + ship_vel + player.Player.get_width() < width:
             player.Player.x += ship_vel
-        if key[pygame.K_UP] and player.Player.y - ship_vel > 0:
+        if key[pygame.K_UP] and player.Player.y - ship_vel - 50 > 0:
             player.Player.y -= ship_vel
         if key[pygame.K_DOWN] and player.Player.y + ship_vel + player.Player.get_height() < height:
             player.Player.y += ship_vel
