@@ -1,11 +1,9 @@
 import pygame
-import random
 import images
-import ship
 import player
 
 pygame.font.init()
-width, height = 720, 720  # height and width of window
+width, height = 600, 720  # height and width of window
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("O.S.D")  # name window
 
@@ -13,14 +11,14 @@ pygame.display.set_caption("O.S.D")  # name window
 # define main
 def main():
     start = True
-    fps = 60  # frames
+    fps = 120  # frames
     level = 1
     lives = 3
     font = pygame.font.SysFont("calibri", 50, bold=True)
 
-    ship_vel = 15
+    ship_vel = 10
 
-    player.Player = player.Player(300, 540)
+    player.Player = player.Player(250, 595)
 
     clock = pygame.time.Clock()  # set clock for clock tick
 
@@ -42,13 +40,13 @@ def main():
                 start = False
 
         key = pygame.key.get_pressed()
-        if key[pygame.K_LEFT] and player.Player.x - ship_vel > 0:
+        if (key[pygame.K_a] or key[pygame.K_LEFT]) and player.Player.x - ship_vel > 0:
             player.Player.x -= ship_vel
-        if key[pygame.K_RIGHT] and player.Player.x + ship_vel + player.Player.get_width() < width:
+        if (key[pygame.K_d] or key[pygame.K_RIGHT]) and player.Player.x + ship_vel + player.Player.get_width() < width:
             player.Player.x += ship_vel
-        if key[pygame.K_UP] and player.Player.y - ship_vel - 50 > 0:
+        if (key[pygame.K_w] or key[pygame.K_UP]) and player.Player.y - ship_vel - 50 > 0:
             player.Player.y -= ship_vel
-        if key[pygame.K_DOWN] and player.Player.y + ship_vel + player.Player.get_height() < height:
+        if (key[pygame.K_s] or key[pygame.K_DOWN]) and player.Player.y + ship_vel + player.Player.get_height() < height:
             player.Player.y += ship_vel
 
 

@@ -7,6 +7,7 @@ shuttle = pygame.image.load('Images/Shuttle.png')
 
 # load player rocket
 rocket = pygame.image.load('Images/rocket.png')
+rocket = pygame.transform.smoothscale(rocket, (115, 115))
 
 # load player ammo
 bullets = pygame.image.load('Images/bullets.png')
