@@ -10,7 +10,7 @@ pygame.display.set_caption("O.S.D")  # name window
 
 # define main
 def main():
-    start = True  # start the infinite loop in "While start"
+    start = True  # start the infinite loop in "while start"
     fps = 120  # how many frames should pass in a unit of time
     level = 1  # current level player is on
     lives = 3  # current amount of lives player has
@@ -40,14 +40,20 @@ def main():
                 start = False  # stops infinite loop
 
         key = pygame.key.get_pressed()  # check to see if a key has been pressed
-        if (key[pygame.K_a] or key[pygame.K_LEFT]) and player.Player.x - player_vel > 0:
-            player.Player.x -= player_vel
-        if (key[pygame.K_d] or key[pygame.K_RIGHT]) and player.Player.x + player_vel + player.Player.get_width() < width:
-            player.Player.x += player_vel
-        if (key[pygame.K_w] or key[pygame.K_UP]) and player.Player.y - player_vel - 50 > 0:
-            player.Player.y -= player_vel
-        if (key[pygame.K_s] or key[pygame.K_DOWN]) and player.Player.y + player_vel + player.Player.get_height() < height:
-            player.Player.y += player_vel
+        if (key[pygame.K_a] or key[pygame.K_LEFT]) and player.Player.x - player_vel > 0:  # check if key a or left
+            # has been pressed & creates play boundaries
+            player.Player.x -= player_vel  # allows player to move in the x direction (left)
+        if (key[pygame.K_d] or key[pygame.K_RIGHT]) and player.Player.x + player_vel \
+                + player.Player.get_width() < width:  # check if key d or right
+            # has been pressed & creates play boundaries
+            player.Player.x += player_vel  # allows player to move in the x direction (right)
+        if (key[pygame.K_w] or key[pygame.K_UP]) and player.Player.y - player_vel - 50 > 0:  # check if key w or up
+            # has been pressed & creates play boundaries
+            player.Player.y -= player_vel  # allows player to move in the y direction (up)
+        if (key[pygame.K_s] or key[pygame.K_DOWN]) and player.Player.y + player_vel \
+                + player.Player.get_height() < height:  # check if key s or down
+            # has been pressed & creates play boundaries
+            player.Player.y += player_vel  # # allows player to move in the y direction (down)
 
 
-main()
+main()  # executes main
