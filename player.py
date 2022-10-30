@@ -10,3 +10,5 @@ class Player(ship.Ship):  # creates a player class which inherits the properties
         self.bullets_img = images.bullets  # sets bullets_img to the variable bullets in images.py
         self.mask = pygame.mask.from_surface(self.ship_img)  # creates a mask of the surface ship_img for collision
         self.max_health = health  # sets max health for player
+
+
