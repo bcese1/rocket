@@ -14,3 +14,6 @@ bullets = pygame.image.load('Images/bullets.png')  # loads bullets.png from the 
 
 # load background
 bg = pygame.image.load('Images/bg.png')  # loads bg.png from the images folder
+
+# Title Screen Background
+tsbg = pygame.image.load('Images/thumbnail_TSBackground.png')

@@ -1,4 +1,7 @@
 import pygame
+
+import images
+
 # initializing the constructor
 pygame.init()
 
@@ -32,8 +35,9 @@ def menu():
     pygame.mixer.music.load('Interstellar Main Theme - Hans Zimmer.wav')
     pygame.mixer.music.play(-1)
     menuStatus = True
+    reverse_fade(screenWidth, screenHeight)
+    # pygame.time.delay(280)
     while menuStatus:
-
         # stores the (x,y) coordinates into the variable as a tuple
         mouse = pygame.mouse.get_pos()
 
@@ -51,17 +55,14 @@ def menu():
                 # if the mouse is clicked on the button the play-state is launched
                 if screenWidth / 2 - 75 <= mouse[0] <= screenWidth / 2 + 65 and screenHeight / 2 - 45 <= mouse[1] <= \
                         screenHeight / 2 + 40:
-                    # main()
-
-                    # print("start has been pressed")
                     menuStatus = False
                 # if the mouse is clicked on the credits screen is launched
                 if screenWidth / 2 - 75 <= mouse[0] <= screenWidth / 2 + 65 and screenHeight / 2 + 45 <= mouse[1] <= \
                         screenHeight / 2 + 85:
                     print("Credits has been pressed")
 
-        # fills the screen with a color
-        screen.fill((60, 25, 60))
+        # sets the title screen background
+        screen.blit(images.tsbg, (0, 0))
 
         # changes shade to light for exit
         if screenWidth / 2 - 75 <= mouse[0] <= screenWidth / 2 + 65 and screenHeight / 2 <= mouse[1] <= \
@@ -98,3 +99,12 @@ def menu():
         pygame.display.update()
 
 
+def reverse_fade(width, height):
+    fade = pygame.Surface((width, height))
+    fade.fill((0, 0, 0))  # sets fade color to black
+    for alpha in reversed(range(0, 250)):  # for loop for alpha (opacity)
+        fade.set_alpha(alpha)  # sets alpha
+        screen.blit(images.tsbg, (0, 0))  # sets background
+        screen.blit(fade, (0, 0))  # sets the fade onto the display
+        pygame.display.update()
+        pygame.time.delay(3)  # delays fade by 3 ms

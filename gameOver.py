@@ -73,10 +73,10 @@ def g_over():
             if event.type == pygame.QUIT:
                 quit(True)
             if event.type == pygame.MOUSEBUTTONDOWN:  # checks for mouse clicked within set parameters
-                if 195 <= m[0] <= (195 + c.get_width()) and 220 <= m[1] <= 270:
+                if 195 <= m[0] <= (195 + c.get_width()) and 260 <= m[1] <= 315:
                     return 1
-                elif 175 <= m[0] <= (175 + ng.get_width()) and 340 <= m[1] <= 410:
+                elif 175 <= m[0] <= (175 + ng.get_width()) and 340 <= m[1] <= 395:
                     return 2
-                elif 252.5 <= m[0] <= 350.5 and 420 <= m[1] <= 490:
+                elif 252.5 <= m[0] <= 350.5 and 420 <= m[1] <= 475:
                     return 3
         pygame.display.update()
