@@ -16,3 +16,4 @@ class Ship:  # creates a new object class (general object)
 
     def get_height(self):  # defines a function get_height which will return the height
         return self.ship_img.get_height()  # returns ship_img height in pixels
+

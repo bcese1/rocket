@@ -3,21 +3,24 @@ import images  # import images.py which loads and transforms images
 import player  # import player.py which is the class player which also inherits its properties from ship.py
 import satalite
 import random
+from gameOver import g_over
+from menu import menu
 
 pygame.font.init()  # initialize pygame font which is used for rendering fonts
 width, height = 600, 720  # height and width of window
 owindow = pygame.display.set_mode((width, height))  # initialize the window for display
 pygame.display.set_caption("O.S.D")  # name window
+pygame.display.set_icon(images.rocket)
 
 
 # define main
-def main(obs_vel=None):
+def main():
+    menu()
     start = True  # start the infinite loop in "while start"
     fps = 120  # how many frames should pass in a unit of time
     level = 0  # current level player is on
     lives = 3  # current amount of lives player has
     font = pygame.font.SysFont("calibri", 50, bold=True)  # Create a pygame font from system font resources
-
     player_vel = 5  # velocity of player ship
 
     player.Player = player.Player(250, 595)  # Position on window to place player starting position
@@ -25,8 +28,10 @@ def main(obs_vel=None):
     clock = pygame.time.Clock()  # set clock for clock tick
 
     obs = []
-    num_line = level
-    obs_vel = 1
+    obs_cor = []
+    obs_vel = 4
+    r_x = [20, 200, 100, 500, 400, 300, 700, 800, 900]
+    r_y = [-100, -250, -450, -550, -800, -50, -650, -900, -1000]
 
     def refresh():
         owindow.blit(images.bg, (0, 0))  # display bg at coord
@@ -43,16 +48,34 @@ def main(obs_vel=None):
         clock.tick(fps)  # Max amount of frames to pass in 1 second
         if len(obs) == 0:
             level += 1
-            num_line += level
+            obs_vel += 0.25
+            num_line = 9
+            if obs_vel == 8:
+                obs_vel = 8
             for i in range(num_line):
-                obstacle = satalite.Obstacle(random.randrange(50, width-100), random.randrange(-1500, -100),
-                                             random.choice(['satalite1', "satalite2", "shuttle"]))
+                if len(obs) != 0 or len(obs) != 1:
+                    obstacle = satalite.Obstacle(r_x[i], r_y[i],
+                                                 random.choice(['satalite1', "satalite2", "shuttle"]))
+                else:
+                    obstacle = satalite.Obstacle(random.randrange(50, width - 100), random.randrange(0, 1),
+                                                 random.choice(['satalite1', "satalite2", "shuttle"]))
                 obs.append(obstacle)
+                obs_cor.append(obstacle.x)
+                if i == 4:
+                    random.shuffle(r_x)
+                    random.shuffle(r_y)
+
         for move in obs[:]:
             move.obsMove(obs_vel)
-            if move.y + move.get_height() > height:
+            if satalite.Obstacle.collide(move, player.Player):
                 lives -= 1
                 obs.remove(move)
+            try:
+                if move.y + obstacle.get_height() > height:
+                    lives -= 0
+                    obs.remove(move)
+            except:
+                print('To The Moon!')
         refresh()  # Calls the refresh function
 
         for event in pygame.event.get():  # look for event
@@ -74,6 +97,20 @@ def main(obs_vel=None):
                 + player.Player.get_height() < height:  # check if key s or down
             # has been pressed & creates play boundaries
             player.Player.y += player_vel  # # allows player to move in the y direction (down)
+
+        if lives == 0:
+            x = g_over()
+            if x == 1:
+                lives = 3
+                level -= 1
+                obs.clear()
+            elif x == 2:
+                lives = 3
+                level = 0
+                obs_vel = 4
+                obs.clear()
+            elif x == 3:
+                quit(True)
 
 
 main()  # executes main
