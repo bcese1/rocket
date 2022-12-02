@@ -13,52 +13,52 @@ ng, ex = font2.render("New Game", True, (255, 255, 255)), font2.render("Exit", T
 w.blit(images.bg, (0, 0))
 
 
-def fade(width, height):        # fades the screen with red
+def fade(width, height):  # fades the screen with red
     fade = pygame.Surface((width, height))
-    fade.fill((255, 0, 0))      # sets fade color to red
-    for alpha in range(0, 100):     # for loop for alpha (opacity)
-        fade.set_alpha(alpha)       # sets alpha
-        w.blit(images.bg, (0, 0))       # uses the fade specific refresh
-        w.blit(fade, (0, 0))        # sets the fade onto the display
+    fade.fill((255, 0, 0))  # sets fade color to red
+    for alpha in range(0, 100):  # for loop for alpha (opacity)
+        fade.set_alpha(alpha)  # sets alpha
+        w.blit(images.bg, (0, 0))  # uses the fade specific refresh
+        w.blit(fade, (0, 0))  # sets the fade onto the display
         pygame.display.update()
-        pygame.time.delay(3)        # delays fade by 3 ms
+        pygame.time.delay(3)  # delays fade by 3 ms
         pygame.display.update()
 
 
-def opac():     # sets the opacity from the end of the fade as a background variable in the refreshes
+def opac():  # sets the opacity from the end of the fade as a background variable in the refreshes
     o = pygame.Surface((600, 720))
-    o.fill((255, 0, 0))     # sets color to red
-    o.set_alpha(100)        # sets opacity to 100 like the fade
-    w.blit(o, (0, 0))       # sets the fade onto the display
+    o.fill((255, 0, 0))  # sets color to red
+    o.set_alpha(100)  # sets opacity to 100 like the fade
+    w.blit(o, (0, 0))  # sets the fade onto the display
 
 
-def mouse():    # tracks the mouse position to update the color of the rectangles behind yes and no
+def mouse():  # tracks the mouse position to update the color of the rectangles behind yes and no
     m = pygame.mouse.get_pos()
 
-    if 195 <= m[0] <= (195 + c.get_width()) and 260 <= m[1] <= 330:       # looks for mouse in this position on display
-        pygame.draw.rect(w, (170, 170, 170), [((600 - c.get_width())/2 - 5), 260, 220, 50])
+    if 195 <= m[0] <= (195 + c.get_width()) and 260 <= m[1] <= 330:  # looks for mouse in this position on display
+        pygame.draw.rect(w, (170, 170, 170), [((600 - c.get_width()) / 2 - 5), 260, 220, 50])
     else:
-        pygame.draw.rect(w, (100, 100, 100), [((600 - c.get_width())/2 - 5), 260, 220, 50])
+        pygame.draw.rect(w, (100, 100, 100), [((600 - c.get_width()) / 2 - 5), 260, 220, 50])
 
     if 175 <= m[0] <= (175 + ng.get_width()) and 340 <= m[1] <= 410:
-        pygame.draw.rect(w, (170, 170, 170), [((600 - ng.get_width())/2 - 5), 340, 260, 50])
+        pygame.draw.rect(w, (170, 170, 170), [((600 - ng.get_width()) / 2 - 5), 340, 260, 50])
     else:
-        pygame.draw.rect(w, (100, 100, 100), [((600 - ng.get_width())/2 - 5), 340, 260, 50])
+        pygame.draw.rect(w, (100, 100, 100), [((600 - ng.get_width()) / 2 - 5), 340, 260, 50])
 
     if 252.5 <= m[0] <= 350.5 and 420 <= m[1] <= 490:
-        pygame.draw.rect(w, (170, 170, 170), [((600 - ex.get_width())/2 - 5), 420, 98, 50])
+        pygame.draw.rect(w, (170, 170, 170), [((600 - ex.get_width()) / 2 - 5), 420, 98, 50])
     else:
-        pygame.draw.rect(w, (100, 100, 100), [((600 - ex.get_width())/2 - 5), 420, 98, 50])
+        pygame.draw.rect(w, (100, 100, 100), [((600 - ex.get_width()) / 2 - 5), 420, 98, 50])
 
 
 def refresh():
     w.blit(images.bg, (0, 0))
     opac()
-    w.blit(g, ((600 - g.get_width()) / 2, 100))      # <- sets text on display
+    w.blit(g, ((600 - g.get_width()) / 2, 100))  # <- sets text on display
     mouse()
-    w.blit(c, ((600 - c.get_width()) / 2, 260))     # <-
-    w.blit(ng, ((600 - ng.get_width()) / 2, 340))   # <-
-    w.blit(ex, ((600 - ex.get_width()) / 2, 420))   # <-
+    w.blit(c, ((600 - c.get_width()) / 2, 260))  # <-
+    w.blit(ng, ((600 - ng.get_width()) / 2, 340))  # <-
+    w.blit(ex, ((600 - ex.get_width()) / 2, 420))  # <-
 
 
 def g_over():
@@ -80,3 +80,5 @@ def g_over():
                 elif 252.5 <= m[0] <= 350.5 and 420 <= m[1] <= 475:
                     return 3
         pygame.display.update()
+
+
