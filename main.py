@@ -5,6 +5,7 @@ import satalite
 import random
 from gameOver import g_over
 from menu import menu
+from menu import pause
 
 pygame.font.init()  # initialize pygame font which is used for rendering fonts
 width, height = 600, 720  # height and width of window
@@ -99,6 +100,8 @@ def main():
                 + player.Player.get_height() < height:  # check if key s or down
             # has been pressed & creates play boundaries
             player.Player.y += player_vel  # # allows player to move in the y direction (down)
+        if key[pygame.K_ESCAPE]:  # checks if the space has been pressed
+            pause()  # if pressed, pauses the game
 
         if lives == 0:
             x = g_over()
