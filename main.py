@@ -22,6 +22,7 @@ def main():
     lives = 3  # current amount of lives player has
     font = pygame.font.SysFont("calibri", 50, bold=True)  # Create a pygame font from system font resources
     player_vel = 5  # velocity of player ship
+    num_line = 4
 
     player.Player = player.Player(250, 595)  # Position on window to place player starting position
 
@@ -49,15 +50,16 @@ def main():
         if len(obs) == 0:
             level += 1
             obs_vel += 0.25
-            num_line = 9
+            if level % 4 == 0:
+                num_line = int(num_line * 1.25)
             if obs_vel == 8:
                 obs_vel = 8
             for i in range(num_line):
-                if len(obs) != 0 or len(obs) != 1:
-                    obstacle = satalite.Obstacle(r_x[i], r_y[i],
+                if i % 2 != 0:
+                    obstacle = satalite.Obstacle(random.randrange(50, 290), random.randrange(-700, -50),
                                                  random.choice(['satalite1', "satalite2", "shuttle"]))
                 else:
-                    obstacle = satalite.Obstacle(random.randrange(50, width - 100), random.randrange(0, 1),
+                    obstacle = satalite.Obstacle(random.randrange(310, 550), random.randrange(-700, -50),
                                                  random.choice(['satalite1', "satalite2", "shuttle"]))
                 obs.append(obstacle)
                 obs_cor.append(obstacle.x)
