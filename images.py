@@ -17,3 +17,7 @@ bg = pygame.image.load('Images/bg.png')  # loads bg.png from the images folder
 
 # Title Screen Background
 tsbg = pygame.image.load('Images/thumbnail_TSBackground.png')
+
+cred = pygame.image.load('Images/credits.png')
+
+htp = pygame.image.load('Images/HowToPlay.PNG')
