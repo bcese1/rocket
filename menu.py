@@ -21,6 +21,8 @@ smallFont = pygame.font.SysFont('calibri', 50)
 textExit, textStart = smallFont.render('Exit', True, white), smallFont.render('Start', True, white)
 textOption, textCredits = smallFont.render('Options', True, white), smallFont.render('Credits', True, white)
 textHTPlay, textPrevious = smallFont.render('How To Play', True, white), smallFont.render('Back', True, white)
+textContinue = smallFont.render('Cont.', True, white)
+textpaused = pygame.font.SysFont('calibri', 100, bold=True, italic=True).render('Paused', True, white)
 
 def b_left(x): return ((screenWidth - x.get_width()) / 2) - 5
 
@@ -96,6 +98,50 @@ def creds_or_htp(value):
         screen.blit(textPrevious, (b_left(textPrevious) + 5, 538))
 
         pygame.display.update()
+
+
+def pause():
+    while True:
+        # stores the (x,y) coordinates into the variable as a tuple
+        m = pygame.mouse.get_pos()
+        for ev in pygame.event.get():
+            if ev.type == pygame.QUIT:
+                quit()
+            # checks if a mouse is clicked
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                # if the mouse is clicked on the button the game is terminated
+                if b_left(textHTPlay) <= m[0] <= b_right(textHTPlay) and screenHeight / 2 - 5 <= m[1] <= \
+                        screenHeight / 2 + 42:
+                    creds_or_htp(1)
+                # if the mouse is clicked on the button the play-state is continued
+                if b_left(textContinue) <= m[0] <= b_right(textContinue) and screenHeight / 2 - 60 <= m[1] <= \
+                        screenHeight / 2 - 20:
+                    return False
+                # if the mouse is clicked on the credits screen is launched
+                if b_left(textCredits) <= m[0] <= b_right(textCredits) and screenHeight / 2 + 55 <= m[1] <= \
+                        screenHeight / 2 + 87:
+                    creds_or_htp(2)
+                if b_left(textExit) + 175 <= m[0] <= b_right(textExit) + 175 and \
+                        screenHeight - 70 <= m[1] <= screenHeight - 30:
+                    quit()
+
+        # fills the screen with a color
+        opac()
+        mouse_movement()
+        # superimposing the text onto our button
+        screen.blit(textpaused, (b_left(textpaused) + 5, screenHeight / 2 - 262))
+        screen.blit(textHTPlay, (b_left(textHTPlay) + 5, screenHeight / 2 - 6))
+        screen.blit(textContinue, (b_left(textContinue) + 5, screenHeight / 2 - 62))
+        screen.blit(textCredits, (b_left(textCredits) + 5, screenHeight / 2 + 53))
+        screen.blit(textExit, (b_left(textExit) + 180, screenHeight - 72))
+
+        # updates the frames of the game
+        pygame.display.update()
+
+def opac():  # sets the opacity from the end of the fade as a background variable in the refreshes
+    o = pygame.Surface((600, 720))
+    o.set_alpha(100)  # sets opacity to 100 like the fade
+    screen.blit(o, (0, 0))  # sets the fade onto the display
 
 
 def menu():
